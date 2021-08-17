@@ -15,6 +15,21 @@ class Counter extends Component {
           <button onClick={this.props.addFiveCounter}>Add 5</button>
           <button onClick={this.props.resetCounter}>Reset</button>
         </div>
+        <button onClick={this.props.onStoredResultsCounter}>
+          Store the results
+        </button>
+        <div>
+          <ul>
+            {this.props.storedResults.map((item) => (
+              <li
+                key={item.id}
+                onClick={() => this.props.deleteResultCounter(item.id)}
+              >
+                {item.value}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -23,6 +38,7 @@ class Counter extends Component {
 const mapStateToProps = (state) => {
   return {
     ctr: state.counter,
+    storedResults: state.results,
   };
 };
 
@@ -34,6 +50,10 @@ const mapDispatchToProps = (dispatch) => {
     removeFiveCounter: () =>
       dispatch({ type: actionTypes.removeFIVE, value: 5 }),
     resetCounter: () => dispatch({ type: actionTypes.RESET }),
+    onStoredResultsCounter: () => dispatch({ type: actionTypes.STORE_RESULTS }),
+    deleteResultCounter: (id) =>
+      dispatch({ type: actionTypes.DELETE_RESULT, item: id }),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

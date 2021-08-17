@@ -22,10 +22,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         counter: state.counter - action.value,
       };
+    case actionTypes.STORE_RESULTS:
+      return {
+        ...state,
+        results: state.results.concat({ id: new Date(), value: state.counter }),
+      };
     case actionTypes.RESET:
       return {
         ...state,
         counter: 0,
+      };
+    case actionTypes.DELETE_RESULT:
+      const updatedResults = state.results.filter(
+        (item) => item.id !== action.item
+      );
+      return {
+        ...state,
+        results: updatedResults,
       };
 
     default:
@@ -36,7 +49,7 @@ const reducer = (state = initialState, action) => {
 
 const initialState = {
   counter: 50,
-  result: [],
+  results: [],
 };
 
 export default reducer;
