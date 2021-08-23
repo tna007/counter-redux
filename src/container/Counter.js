@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => {
     resetCounter: () => dispatch({ type: actionTypes.RESET }),
     onStoredResultsCounter: () => dispatch({ type: actionTypes.STORE_RESULTS }),
     deleteResultCounter: (id) =>
-      dispatch({ type: actionTypes.DELETE_RESULT, item: id }),
+      dispatch({ type: actionTypes.DELETE_RESULT, payload: id }),
   };
 };
 

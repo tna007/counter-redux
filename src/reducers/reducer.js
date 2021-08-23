@@ -33,12 +33,9 @@ const reducer = (state = initialState, action) => {
         counter: 0,
       };
     case actionTypes.DELETE_RESULT:
-      const updatedResults = state.results.filter(
-        (item) => item.id !== action.item
-      );
       return {
         ...state,
-        results: updatedResults,
+        results: state.results.filter((item) => item.id !== action.payload),
       };
 
     default:
